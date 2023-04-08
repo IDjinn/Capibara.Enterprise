@@ -36,7 +36,7 @@ public class SocketClient : ISocketClient
         _packetManager = packetManager;
         _socket = socket;
 
-        _cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+        _cancellationTokenSource = new CancellationTokenSource();
         _listenerTask = ListenAsync();
     }
 
@@ -54,7 +54,6 @@ public class SocketClient : ISocketClient
             var buffer = ArrayPool<byte>.Shared.Rent(SocketSettings.BUFFER_SIZE);
             var receiveBufferLength =
                 await _socket.ReceiveAsync(buffer, SocketFlags.None, _cancellationTokenSource.Token);
-            // PacketSlicer(receiveBufferLength, ref buffer);
             var data = new byte[receiveBufferLength];
             Buffer.BlockCopy(buffer, 0, data, 0, receiveBufferLength);
             ArrayPool<byte>.Shared.Return(buffer);
@@ -97,23 +96,5 @@ public class SocketClient : ISocketClient
         _cancellationTokenSource.Cancel();
         _socket.Dispose();
         GC.SuppressFinalize(this);
-    }
-
-
-    private IEnumerable<IPacketReader> PacketSlicer(int receivedSize, ref byte[] data)
-    {
-        var offset = SocketSettings.SKIP_BYTES_LENGTH;
-        var packets = new List<IPacketReader>();
-        while (offset < receivedSize)
-        {
-            var packetLength = (data[offset++] << 24) | (data[offset++] << 16) | (data[offset++] << 8) | data[offset++];
-            var packetData = new byte[packetLength];
-            Buffer.BlockCopy(data, offset, packetData, 0, packetLength);
-            var packet = _packetReaderFactory.Create(packetData, packetLength);
-            packets.Add(packet);
-            offset += packetLength;
-        }
-
-        return packets;
     }
 }

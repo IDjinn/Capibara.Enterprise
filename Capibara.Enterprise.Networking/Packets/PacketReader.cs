@@ -1,15 +1,15 @@
 using System.Collections.ObjectModel;
 using System.Text;
+using Capibara.Enterprise.Core.API.Networking.Common;
+using Capibara.Enterprise.Core.API.Networking.Common.Packets;
 using Capibara.Enterprise.Core.API.Util.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Capibara.Enterprise.Core.API.Networking.Common.Packets;
+namespace Capibara.Enterprise.Networking.Packets;
 
 [Inject(ServiceLifetime.Transient)]
 public class PacketReader : IPacketReader
 {
-    private int _offset;
-
     public PacketReader(byte[] data, int length)
     {
         _data = data;
@@ -19,41 +19,43 @@ public class PacketReader : IPacketReader
     }
 
     private byte[] _data { get; }
+    public int Offset { get; private set; }
     public int Length { get; }
+
 
     public ReadOnlyCollection<byte> Data => _data.AsReadOnly();
 
 
     public int ReadInt()
     {
-        return
-            (_data[_offset++] << 24) |
-            (_data[_offset++] << 16) |
-            (_data[_offset++] << 8) |
-            _data[_offset++];
+        var value = HabboPacketReadersHelper.ReadInt(_data, Offset);
+        Offset += sizeof(int);
+        return value;
     }
 
     public short ReadShort()
     {
-        return (short)((_data[_offset++] << 8) | _data[_offset++]);
+        var value = HabboPacketReadersHelper.ReadShort(_data, Offset);
+        Offset += sizeof(short);
+        return value;
     }
 
     public string ReadString()
     {
         var length = ReadShort();
-        var str = Encoding.UTF8.GetString(_data, _offset, length);
-        _offset += length;
+        var str = Encoding.UTF8.GetString(_data, Offset, length);
+        Offset += length;
         return str;
     }
 
     public bool ReadBool()
     {
-        return _data[_offset++] != 0;
+        return _data[Offset++] != 0;
     }
 
     public void ResetOffset()
     {
-        _offset = 0;
+        Offset = 0;
         ReadInt();
     }
 }

@@ -54,19 +54,19 @@ public class SocketClient : ISocketClient
             var buffer = ArrayPool<byte>.Shared.Rent(SocketSettings.BUFFER_SIZE);
             var receiveBufferLength =
                 await _socket.ReceiveAsync(buffer, SocketFlags.None, _cancellationTokenSource.Token);
-            var data = new byte[receiveBufferLength];
-            Buffer.BlockCopy(buffer, 0, data, 0, receiveBufferLength);
-            ArrayPool<byte>.Shared.Return(buffer);
-            var reader = _packetReaderFactory.Create(data, receiveBufferLength);
-
+            foreach (var reader in SlicePacketsInBuffer(buffer, receiveBufferLength))
+            {
 #if DEBUG
-            var headerId = reader.ReadShort();
-            _logger.LogDebug("[->] [{HeaderId}] [{Data}]", headerId,
-                Encoding.ASCII.GetString(reader.Data.Take(receiveBufferLength).ToArray()));
-            reader.ResetOffset();
+                var headerId = reader.ReadShort();
+                _logger.LogDebug("[->] [{HeaderId}] [{Data}]", headerId,
+                    Encoding.ASCII.GetString(reader.Data.Take(receiveBufferLength).ToArray()));
+                reader.ResetOffset();
 #endif
 
-            await _packetManager.ExecuteAsync(reader, _cancellationTokenSource, this);
+                await _packetManager.ExecuteAsync(reader, _cancellationTokenSource, this);
+            }
+
+            ArrayPool<byte>.Shared.Return(buffer);
         } while (!_cancellationTokenSource.IsCancellationRequested);
     }
 
@@ -96,5 +96,19 @@ public class SocketClient : ISocketClient
         _cancellationTokenSource.Cancel();
         _socket.Dispose();
         GC.SuppressFinalize(this);
+    }
+
+    private IEnumerable<IPacketReader> SlicePacketsInBuffer(byte[] buffer, int bufferLength)
+    {
+        var offset = 0;
+        do
+        {
+            var packetSize = HabboPacketReadersHelper.ReadInt(buffer, offset);
+            var packetData = new byte[packetSize + sizeof(int)];
+            Buffer.BlockCopy(buffer, offset, packetData, 0, packetSize + sizeof(int));
+            offset += packetSize + sizeof(int);
+
+            yield return _packetReaderFactory.Create(packetData, packetSize);
+        } while (offset < bufferLength);
     }
 }

@@ -1,5 +1,6 @@
 using Capibara.Enterprise.Core.API.Networking.Common.Packets;
 using Capibara.Enterprise.Core.API.Util.Attributes;
+using Capibara.Enterprise.Networking.Packets;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Capibara.Enterprise.Networking.Sockets;

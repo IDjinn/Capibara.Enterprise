@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Reflection;
 using Capibara.Enterprise.Core.API.Util.Attributes;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +14,10 @@ public static class DependencyInjectorUtils
             .Where(type => type.GetCustomAttributes<InjectAttribute>().Any());
         foreach (var type in typesToInject)
         {
-            var _interface = type.GetInterfaces().First()!;
+            var _interface = type.GetInterfaces().FirstOrDefault(inter => inter.Name.Contains(type.Name)) ??
+                             type.GetInterfaces().FirstOrDefault();
+            if (_interface is null || type.IsInterface) continue;
             var injectAttribute = type.GetCustomAttributes<InjectAttribute>().First();
-            Debug.Assert(_interface is not null);
-            Debug.Assert(!type.IsInterface);
 
             switch (injectAttribute.Lifetime)
             {

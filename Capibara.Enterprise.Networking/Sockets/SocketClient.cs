@@ -21,9 +21,7 @@ public class SocketClient : ISocketClient
     private readonly IPacketReaderFactory _packetReaderFactory;
     private readonly Socket _socket;
     private volatile CancellationTokenSource _cancellationTokenSource;
-    private IHabbo? _habbo;
 
-    private Task _listenerTask;
 
     public SocketClient(
         ILogger<SocketClient> logger,
@@ -37,7 +35,7 @@ public class SocketClient : ISocketClient
         _socket = socket;
 
         _cancellationTokenSource = new CancellationTokenSource();
-        _listenerTask = ListenAsync();
+        var _ = ListenAsync();
     }
 
     public bool IsAuth { get; }

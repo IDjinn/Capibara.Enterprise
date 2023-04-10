@@ -8,10 +8,13 @@ namespace Capibara.Enterprise.Core.Hotel.Users;
 [Inject(ServiceLifetime.Scoped)]
 internal sealed record Habbo : IHabbo
 {
-    public Habbo(ISocketClient client)
+    public Habbo(ISocketClient client, HabboProfileInfo profileInfo)
     {
         Client = client;
+        ProfileInfo = profileInfo;
     }
+
+    public HabboProfileInfo ProfileInfo { get; }
 
     public uint Cash { get; }
 

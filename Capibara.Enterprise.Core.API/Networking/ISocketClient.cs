@@ -8,6 +8,9 @@ namespace Capibara.Enterprise.Core.API.Networking;
 public interface ISocketClient : IDisposable
 {
     [MemberNotNullWhen(true, nameof(Habbo))]
+    [MemberNotNullWhen(true, nameof(MachineId))]
+    [MemberNotNullWhen(true, nameof(VersionRelease))]
+    [MemberNotNullWhen(true, nameof(SsoTicket))]
     public bool IsAuth { get; }
 
     public IHabbo? Habbo { get; set; }

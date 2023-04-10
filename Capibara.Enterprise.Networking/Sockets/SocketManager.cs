@@ -55,8 +55,9 @@ internal record class SocketManager : ISocketManager
                     _logger.LogInformation("Connection from {Endpoint} recieved",
                         clientSocket?.RemoteEndPoint?.ToString() ?? "unknow endpoint");
 
-                    var client = _clientFactory.Create(clientSocket);
+                    var client = _clientFactory.Create(clientSocket!);
                     if (!_clients.TryAdd(client)) client.Dispose();
+                    // TODO: SOCKET DISPOSE WHEN DISCONNECT
                 }
                 catch (Exception e)
                 {

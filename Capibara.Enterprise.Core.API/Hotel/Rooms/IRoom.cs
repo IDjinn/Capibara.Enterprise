@@ -10,6 +10,6 @@ public interface IRoom : IAsyncDisposable
     public RoomId Id { get; }
     public bool IsReady { get; }
     public IRoomEntityManager EntityManager { get; }
-    public IRoomChunkManager ChunkManager { get; }
+    public IRoomChunkInitializer ChunkInitializer { get; }
     public ValueTask Initialize();
 }

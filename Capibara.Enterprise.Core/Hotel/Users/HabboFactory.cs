@@ -15,8 +15,8 @@ public class HabboFactory : IHabboFactory
         _provider = provider;
     }
 
-    public IHabbo Create(HabboProfileInfo profileInfo, ISocketClient client)
+    public IHabbo Create(HabboId id, HabboProfileInfo profileInfo, IGameClient client)
     {
-        return ActivatorUtilities.CreateInstance<Habbo>(_provider, profileInfo, client);
+        return ActivatorUtilities.CreateInstance<Habbo>(_provider, id, profileInfo, client);
     }
 }

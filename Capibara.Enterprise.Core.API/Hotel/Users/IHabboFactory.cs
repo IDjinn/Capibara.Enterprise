@@ -4,5 +4,5 @@ namespace Capibara.Enterprise.Core.API.Hotel.Users;
 
 public interface IHabboFactory
 {
-    public IHabbo Create(HabboProfileInfo profileInfo, ISocketClient client);
+    public IHabbo Create(HabboId id, HabboProfileInfo profileInfo, IGameClient client);
 }

@@ -20,9 +20,9 @@ public sealed record RoomEntityManager : IRoomEntityManager
 
     public IReadOnlyDictionary<RoomEntityId, IRoomEntity> LoadedEntities => _entities.AsReadOnly();
 
-    public IRoomEntity? GetEntity(RoomEntityId id)
+    public TRoomEntity? GetEntity<TRoomEntity>(RoomEntityId id) where TRoomEntity : IRoomEntity
     {
-        return _entities.TryGetValue(id, out var entity) ? entity : null;
+        return _entities.TryGetValue(id, out var entity) ? (TRoomEntity)entity : default;
     }
 
     public IRoomEntity? GetEntityByName(string name)

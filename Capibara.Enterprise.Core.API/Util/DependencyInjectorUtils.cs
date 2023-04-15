@@ -1,4 +1,5 @@
 using System.Reflection;
+using Capibara.Enterprise.Core.API.Hotel;
 using Capibara.Enterprise.Core.API.Util.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,24 +20,10 @@ public static class DependencyInjectorUtils
             if (_interface is null || type.IsInterface) continue;
             var injectAttribute = type.GetCustomAttributes<InjectAttribute>().First();
 
-            switch (injectAttribute.Lifetime)
-            {
-                case ServiceLifetime.Scoped:
-                {
-                    services.AddScoped(_interface, type);
-                    break;
-                }
-                case ServiceLifetime.Singleton:
-                {
-                    services.AddSingleton(_interface, type);
-                    break;
-                }
-                case ServiceLifetime.Transient:
-                {
-                    services.AddTransient(_interface, type);
-                    break;
-                }
-            }
+            services.Add(new ServiceDescriptor(_interface, type, injectAttribute.Lifetime));
+            var hotelService = type.GetInterface(nameof(IHotelService));
+            if (hotelService is not null)
+                services.Add(new ServiceDescriptor(typeof(IHotelService), type, injectAttribute.Lifetime));
         }
 
         return services;

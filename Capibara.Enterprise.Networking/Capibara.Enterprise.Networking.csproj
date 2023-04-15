@@ -16,7 +16,22 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Capibara.Enterprise.Core.API\Capibara.Enterprise.Core.API.csproj"/>
-        <ProjectReference Include="..\Capibara.Enterprise.Packets\Capibara.Enterprise.Packets.csproj"/>
+        <ProjectReference Include="..\Capibara.Enterprise.Presentation.Packets\Capibara.Enterprise.Presentation.Packets.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Capibara.Enterprise.Presentation.RawSockets\RawSocketClient.cs">
+            <Link>Capibara.Enterprise.Networking.RawSockets\RawSocketClient.cs</Link>
+        </Compile>
+        <Compile Update="Capibara.Enterprise.Presentation.RawSockets\GameClientFactory.cs">
+            <Link>Capibara.Enterprise.Networking.RawSockets\GameClientFactory.cs</Link>
+        </Compile>
+        <Compile Update="Capibara.Enterprise.Presentation.RawSockets\SocketManager.cs">
+            <Link>Capibara.Enterprise.Networking.RawSockets\SocketManager.cs</Link>
+        </Compile>
+        <Compile Update="Capibara.Enterprise.Presentation.RawSockets\DependencyInjector.cs">
+            <Link>Capibara.Enterprise.Networking.RawSockets\DependencyInjector.cs</Link>
+        </Compile>
     </ItemGroup>
 
 </Project>

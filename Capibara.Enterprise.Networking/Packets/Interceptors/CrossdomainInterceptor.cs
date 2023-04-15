@@ -28,7 +28,7 @@ public class CrossdomainInterceptor : IPacketInterceptor
         _packetManager.OnPacketReceive += Intercept;
     }
 
-    public void Intercept(IPacketReader reader, CancellationTokenSource cancellationTokenSource, ISocketClient client)
+    public void Intercept(IPacketReader reader, CancellationTokenSource cancellationTokenSource, IGameClient client)
     {
         Debug.Assert(!client.IsAuth);
         if (reader.Data[0] == Convert.ToByte('<'))

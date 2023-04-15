@@ -7,6 +7,6 @@ public interface IRoomEntityManager : IAsyncDisposable, IRoomComponent
 {
     public IReadOnlyDictionary<RoomEntityId, IRoomEntity> LoadedEntities { get; }
 
-    public IRoomEntity? GetEntity(RoomEntityId id);
+    public TRoomEntity? GetEntity<TRoomEntity>(RoomEntityId id) where TRoomEntity : IRoomEntity;
     public IRoomEntity? GetEntityByName(string name);
 }

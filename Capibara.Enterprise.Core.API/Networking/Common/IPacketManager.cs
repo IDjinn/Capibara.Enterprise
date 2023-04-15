@@ -5,10 +5,10 @@ namespace Capibara.Enterprise.Core.API.Networking.Common;
 public interface IPacketManager
 {
     public delegate void IncomingPacketIntercept(IPacketReader reader, CancellationTokenSource cancellationToken,
-        ISocketClient client);
+        IGameClient client);
 
     public event IncomingPacketIntercept OnPacketReceive;
 
     public ValueTask ExecuteAsync(IPacketReader reader, CancellationTokenSource cancellationToken,
-        ISocketClient client);
+        IGameClient client);
 }

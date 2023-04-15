@@ -14,8 +14,8 @@ public class RoomFactory : IRoomFactory
         _provider = provider;
     }
 
-    public IRoom Create()
+    public IRoom Create(RoomData roomData)
     {
-        return ActivatorUtilities.CreateInstance<Room>(_provider);
+        return ActivatorUtilities.CreateInstance<Room>(_provider, roomData.Id, roomData);
     }
 }

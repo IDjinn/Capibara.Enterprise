@@ -41,7 +41,7 @@ internal sealed class PacketManager : IPacketManager
 
 
     public ValueTask ExecuteAsync(IPacketReader reader, CancellationTokenSource cancellationTokenSource,
-        ISocketClient client)
+        IGameClient client)
     {
         var interceptorCancellationToken = new CancellationTokenSource();
         OnPacketReceive?.Invoke(reader, interceptorCancellationToken, client);

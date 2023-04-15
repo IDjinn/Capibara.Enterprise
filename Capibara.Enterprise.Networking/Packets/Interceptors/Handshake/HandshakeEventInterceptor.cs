@@ -4,7 +4,7 @@ using Capibara.Enterprise.Core.API.Networking.Common;
 using Capibara.Enterprise.Core.API.Networking.Common.Packets;
 using Capibara.Enterprise.Core.API.Networking.Sockets;
 using Capibara.Enterprise.Core.API.Util.Attributes;
-using Capibara.Enterprise.Packets.Incoming.Handshake;
+using Capibara.Enterprise.Presentation.Packets.Incoming.Handshake;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Capibara.Enterprise.Networking.Packets.Interceptors.Handshake;
@@ -21,7 +21,7 @@ public class HandshakeEventInterceptor : IPacketInterceptor
         _packetManager.OnPacketReceive += Intercept;
     }
 
-    public void Intercept(IPacketReader reader, CancellationTokenSource cancellationTokenSource, ISocketClient client)
+    public void Intercept(IPacketReader reader, CancellationTokenSource cancellationTokenSource, IGameClient client)
     {
         if (cancellationTokenSource.IsCancellationRequested)
             return;

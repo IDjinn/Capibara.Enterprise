@@ -10,7 +10,7 @@ namespace Capibara.Enterprise.Core.Hotel.Rooms;
 public sealed record Room(
     RoomId Id,
     IRoomEntityManager EntityManager,
-    IRoomChunkManager ChunkManager
+    IRoomChunkInitializer ChunkInitializer
 ) : IRoom
 {
     private volatile bool _isReady;

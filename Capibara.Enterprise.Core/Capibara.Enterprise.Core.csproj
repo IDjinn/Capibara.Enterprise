@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Capibara.Enterprise.Core.API\Capibara.Enterprise.Core.API.csproj"/>
+        <ProjectReference Include="..\Capibara.Enterprise.Infrastructure.API\Capibara.Enterprise.Infrastructure.API.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

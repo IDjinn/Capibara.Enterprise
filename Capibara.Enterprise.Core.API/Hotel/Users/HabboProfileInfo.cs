@@ -5,7 +5,7 @@ namespace Capibara.Enterprise.Core.API.Hotel.Users;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public sealed record HabboProfileInfo(
-    int Id,
+    HabboId Id,
     string Nickname,
     Gender Gender,
     Figure Figure,

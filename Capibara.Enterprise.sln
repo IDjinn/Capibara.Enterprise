@@ -4,15 +4,34 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Core", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Networking", "Capibara.Enterprise.Networking\Capibara.Enterprise.Networking.csproj", "{3C151186-2DEE-48C7-BB07-55F94C0E3C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Packets", "Capibara.Enterprise.Packets\Capibara.Enterprise.Packets.csproj", "{9DEBD1FA-6D27-4232-8C9C-F4886E1A0DB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Presentation.Packets", "Capibara.Enterprise.Presentation.Packets\Capibara.Enterprise.Presentation.Packets.csproj", "{9DEBD1FA-6D27-4232-8C9C-F4886E1A0DB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Console", "Capibara.Enterprise.Console\Capibara.Enterprise.Console.csproj", "{AF36312E-06C7-4C5F-987A-F8F57B3260DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Presentation.Console", "Capibara.Enterprise.Presentation.Console\Capibara.Enterprise.Presentation.Console.csproj", "{AF36312E-06C7-4C5F-987A-F8F57B3260DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Core.API", "Capibara.Enterprise.Core.API\Capibara.Enterprise.Core.API.csproj", "{7B9B7E58-56E6-40B8-887A-346D1E260DB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capibara.Enterprise.Networking", "Capibara.Enterprise.Networking", "{07C0DA1D-FBFD-4FD7-AAD3-E3AC4D1C6E24}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capibara.Enterprise.Core", "Capibara.Enterprise.Core", "{061F9489-562A-4F69-9594-ECF173AE9A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Infrastructure", "Capibara.Enterprise.Infrastructure\Capibara.Enterprise.Infrastructure.csproj", "{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Infrastructure.API", "Capibara.Enterprise.Infrastructure.API\Capibara.Enterprise.Infrastructure.API.csproj", "{1C42053B-DC85-42F4-A9B5-2415536ABE17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capibara.Enterprise.Infrastructure", "Capibara.Enterprise.Infrastructure", "{A6DDE094-B0E7-4EA2-98FE-090B31862FCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capibara.Enterprise.Presentation", "Capibara.Enterprise.Presentation", "{A2C24926-AF47-45B2-94BD-20A37A376277}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution.Files", "Solution.Files", "{283D2FE8-5825-4E24-BDDD-86377BB07A53}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+		init.sql = init.sql
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Presentation.RawSockets", "Capibara.Enterprise.Presentation.RawSockets\Capibara.Enterprise.Presentation.RawSockets.csproj", "{AE0FBA65-AD45-411F-BC85-C165B6E20CC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capibara.Enterprise.Presentation.WebSockets", "Capibara.Enterprise.Presentation.WebSockets\Capibara.Enterprise.Presentation.WebSockets.csproj", "{B2FF56F3-F899-40CB-BC75-62196FD9CAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +59,32 @@ Global
 		{7B9B7E58-56E6-40B8-887A-346D1E260DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B9B7E58-56E6-40B8-887A-346D1E260DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B9B7E58-56E6-40B8-887A-346D1E260DB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C42053B-DC85-42F4-A9B5-2415536ABE17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C42053B-DC85-42F4-A9B5-2415536ABE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C42053B-DC85-42F4-A9B5-2415536ABE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C42053B-DC85-42F4-A9B5-2415536ABE17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0FBA65-AD45-411F-BC85-C165B6E20CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0FBA65-AD45-411F-BC85-C165B6E20CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0FBA65-AD45-411F-BC85-C165B6E20CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0FBA65-AD45-411F-BC85-C165B6E20CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2FF56F3-F899-40CB-BC75-62196FD9CAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FF56F3-F899-40CB-BC75-62196FD9CAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FF56F3-F899-40CB-BC75-62196FD9CAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FF56F3-F899-40CB-BC75-62196FD9CAE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3C151186-2DEE-48C7-BB07-55F94C0E3C3D} = {07C0DA1D-FBFD-4FD7-AAD3-E3AC4D1C6E24}
 		{99AA6703-1307-4910-B632-BF7D72BC0C48} = {061F9489-562A-4F69-9594-ECF173AE9A52}
 		{7B9B7E58-56E6-40B8-887A-346D1E260DB0} = {061F9489-562A-4F69-9594-ECF173AE9A52}
+		{6524ED8F-AE60-40F1-8FBE-725E1A1ACE12} = {A6DDE094-B0E7-4EA2-98FE-090B31862FCD}
+		{1C42053B-DC85-42F4-A9B5-2415536ABE17} = {A6DDE094-B0E7-4EA2-98FE-090B31862FCD}
+		{AF36312E-06C7-4C5F-987A-F8F57B3260DF} = {A2C24926-AF47-45B2-94BD-20A37A376277}
+		{9DEBD1FA-6D27-4232-8C9C-F4886E1A0DB3} = {A2C24926-AF47-45B2-94BD-20A37A376277}
+		{AE0FBA65-AD45-411F-BC85-C165B6E20CC1} = {A2C24926-AF47-45B2-94BD-20A37A376277}
+		{B2FF56F3-F899-40CB-BC75-62196FD9CAE6} = {A2C24926-AF47-45B2-94BD-20A37A376277}
 	EndGlobalSection
 EndGlobal
